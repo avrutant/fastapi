@@ -13,6 +13,11 @@ async def find_all_users():
     return usersEntity(conn.demo.user.find())
 
 
+@user.get('/{user_id}')
+async def find_user(user_id:str):
+    return usersEntity(conn.demo.user.find({"_id": ObjectId(user_id)}))
+
+
 @user.post('/')
 async def create_user(user: User):
     conn.demo.user.insert_one(dict(user))
